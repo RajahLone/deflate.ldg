@@ -69,7 +69,10 @@ new: clean
 	$(CC) $(CFLAGS) -mcpu=5475 -c $*.c -o ./build/ColdFire/$*.o
 
 $(TARGET): $(OBJS)
+	mkdir -p ./build/68000
 	$(CC) ./build/68000/*.o -m68000 $(LDLIBS) -o ./build/68000/$(TARGET)
+	mkdir -p ./build/68020
 	$(CC) ./build/68020/*.o -m68020-60 $(LDLIBS) -o ./build/68020/$(TARGET)
+	mkdir -p ./build/ColdFire
 	$(CC) ./build/ColdFire/*.o -mcpu=5475 $(LDLIBS) -o ./build/ColdFire/$(TARGET)
 

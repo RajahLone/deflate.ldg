@@ -1,6 +1,5 @@
 
 #include <ldg.h>
-
 #include <zlib.h>
 
 /* general */
@@ -29,7 +28,8 @@ unsigned long CDECL update_crc32(uLong crc_value, const Bytef *buf, uInt len) { 
 
 /* populate functions list and info for the LDG */
 
-PROC LibFunc[] = { 
+PROC LibFunc[] =
+{
   {"get_version", "char* get_version(void);\n", get_version},
   {"get_info", "char* get_info(void);\n", get_info},
   {"get_error", "char* get_error(int err);\n", get_error},
@@ -45,13 +45,14 @@ PROC LibFunc[] = {
   {"raw_inflate_end", "long raw_inflate_end(z_stream *strm);\n", raw_inflate_end},
   
   {"update_crc32", "unsigned long update_crc32(unsigned long crc, char *src, unsigned int srclen);\n", update_crc32}
-  };
+};
 
 LDGLIB LibLdg[] = { { 0x0006,  12, LibFunc,  "zlib: deflate/inflate/crc32 basic routines.", 1} };
 
 /*  */
 
-int main(void) {
-  ldg_init( LibLdg);
+int main(void)
+{
+  ldg_init(LibLdg);
   return 0;
-  }
+}

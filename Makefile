@@ -1,9 +1,11 @@
-#
-# Makefile
-#
+
 CFLAGS  = -Wall -O -fomit-frame-pointer -DATARI -DNO_GZIP -DPKZIP_BUG_WORKAROUND
 LDFLAGS = -s
 LDLIBS  = -lldg
+
+#
+# create manualy ./build/68000/ and ./build/68020/ and ./build/ColdFire/ folder for the targets to be placed.
+#
 
 TARGET = deflate.ldg
 
@@ -69,10 +71,7 @@ new: clean
 	$(CC) $(CFLAGS) -mcpu=5475 -c $*.c -o ./build/ColdFire/$*.o
 
 $(TARGET): $(OBJS)
-	mkdir ./build/68000
 	$(CC) ./build/68000/*.o -m68000 $(LDLIBS) -o ./build/68000/$(TARGET)
-	mkdir ./build/68020
 	$(CC) ./build/68020/*.o -m68020-60 $(LDLIBS) -o ./build/68020/$(TARGET)
-	mkdir ./build/ColdFire
 	$(CC) ./build/ColdFire/*.o -mcpu=5475 $(LDLIBS) -o ./build/ColdFire/$(TARGET)
 

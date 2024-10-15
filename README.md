@@ -3,8 +3,8 @@
 Library using the LDG system and the zlib functions (crc32, deflate and inflate algorithms, etc).
 
 Used by:
-– KK Commander to handle PKZIP archives (zip, unzip).
-– Troll and Crésus to create backup archives (zip).
+..* KK Commander to handle PKZIP archives (zip, unzip).
+..*Troll and Crésus to create backup archives (zip).
 
 Other programs can use it, please read the how-to and functions calls in the st-guide documentation and exemple.
 

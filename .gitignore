@@ -1,6 +1,4 @@
 .DS_Store
-*.xcuserdata
-*.xcsettings
-*.xcuserstate
-XCBuildData
 build/*
+*.xcodeproj
+

@@ -14,9 +14,9 @@ Other programs can use it, please read the how-to and functions calls in the st-
 - pre-requisite: different targets of libldg.a in /opt/cross-mint/m68k-atari-mint/lib/
 
 - in an empty folder,
-mkdir ./build/68000
-mkdir ./build/68020
-mkdir ./build/ColfFire
+  mkdir ./build/68000
+  mkdir ./build/68020
+  mkdir ./build/ColfFire
 
 - get [deflate_r6_src.zip](https://ptonthat.fr/files/deflate/deflate_r6_src.zip) and unpack the contents of /deflate.ldg/ to ./
 

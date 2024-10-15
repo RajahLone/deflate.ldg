@@ -3,3 +3,4 @@
 *.xcsettings
 *.xcuserstate
 XCBuildData
+build/*

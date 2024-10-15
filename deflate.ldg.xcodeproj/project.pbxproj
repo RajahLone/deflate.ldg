@@ -10,6 +10,7 @@
 		08FB7796FE84155DC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		17F2C7ED0626E67600C3E2E4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 5; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		4554AFFA2BED0EF800938876 /* gzguts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gzguts.h; sourceTree = "<group>"; };
+		456176C92CBEAEDA00F8A082 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		458513AF1866064300653645 /* crc32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crc32.h; sourceTree = "<group>"; };
 		458513B01866064300653645 /* deflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deflate.h; sourceTree = "<group>"; };
 		458513B21866064300653645 /* inffast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inffast.h; sourceTree = "<group>"; };
@@ -35,6 +36,7 @@
 		08FB7794FE84155DC02AAC07 /* zlib.ldg */ = {
 			isa = PBXGroup;
 			children = (
+				456176C92CBEAEDA00F8A082 /* README.md */,
 				458513AF1866064300653645 /* crc32.h */,
 				458513B01866064300653645 /* deflate.h */,
 				458513B21866064300653645 /* inffast.h */,

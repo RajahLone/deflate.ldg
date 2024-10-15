@@ -13,7 +13,7 @@ Other programs can use it, please read the how-to and functions calls in the st-
 
 - pre-requisite: different targets of libldg.a in /opt/cross-mint/m68k-atari-mint/lib/
 
-- in an empty folder, 
+- in an empty folder,  
    ```mkdir ./build/68000```  
    ```mkdir ./build/68020```  
    ```mkdir ./build/ColfFire```  

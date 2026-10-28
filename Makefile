@@ -1,10 +1,15 @@
+CMINI = libcmini/lib
 
 CFLAGS  = -Wall -O -fomit-frame-pointer -DATARI -DNO_GZIP -DPKZIP_BUG_WORKAROUND
-LDFLAGS = -s
-LDLIBS  = -lldg
+LDFLAGS = -s -nostdlib $(CMINI)/crt0.o
+LDLIBS  = -L$(CMINI) -lcmini -lgcc -lcmini -lldg -lcmini #-lm -lcmini
 
 #
-# create manualy ./build/68000/ and ./build/68020/ and ./build/ColdFire/ folder for the targets to be placed.
+# create manually
+# ./build/68000/
+# ./build/68020/
+# ./build/ColdFire/
+# folders for the targets to be placed.
 #
 
 TARGET = deflate.ldg
@@ -39,10 +44,13 @@ OBJS = $(COBJS:.c=.o)
 
 all: $(TARGET)
 	$(STRIP) ./build/68000/$(TARGET)
+	$(STACK) -S 32k ./build/68000/$(TARGET)
 	-@rm -f ./build/68000/*.o
 	$(STRIP) ./build/68020/$(TARGET)
+	$(STACK) -S 32k ./build/68020/$(TARGET)
 	-@rm -f ./build/68020/*.o
 	$(STRIP) ./build/ColdFire/$(TARGET)
+	$(STACK) -S 32k ./build/ColdFire/$(TARGET)
 	-@rm -f ./build/ColdFire/*.o
 	@echo All done
 
@@ -71,7 +79,7 @@ new: clean
 	$(CC) $(CFLAGS) -mcpu=5475 -c $*.c -o ./build/ColdFire/$*.o
 
 $(TARGET): $(OBJS)
-	$(CC) ./build/68000/*.o -m68000 $(LDLIBS) -o ./build/68000/$(TARGET)
-	$(CC) ./build/68020/*.o -m68020-60 $(LDLIBS) -o ./build/68020/$(TARGET)
-	$(CC) ./build/ColdFire/*.o -mcpu=5475 $(LDLIBS) -o ./build/ColdFire/$(TARGET)
+	$(CC) $(LDFLAGS) ./build/68000/*.o -o ./build/68000/$(TARGET) -m68000 $(LDLIBS)
+	$(CC) $(LDFLAGS) ./build/68020/*.o -o ./build/68020/$(TARGET) -m68020-60 $(LDLIBS)
+	$(CC) $(LDFLAGS) ./build/ColdFire/*.o -o ./build/ColdFire/$(TARGET) -mcpu=5475 $(LDLIBS)
 

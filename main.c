@@ -2,6 +2,19 @@
 #include <ldg.h>
 #include <zlib.h>
 
+/* internal  */
+
+void * my_alloc(void *opaque, uInt items, uInt size)
+{
+  (void)opaque;
+  return ldg_Calloc(items, size);
+}
+void my_free(void *opaque, void * ptr)
+{
+  (void)opaque;
+  ldg_Free(ptr);
+}
+
 /* general */
 
 const char* CDECL get_version() { return ZLIB_VERSION; }
@@ -12,15 +25,51 @@ unsigned long CDECL get_sizeof_stream_struct() { return (uLong)sizeof(z_stream);
 
 /* zip */
 
-int CDECL raw_deflate_init (z_stream *strm, int level) { return deflateInit2(strm, level, Z_DEFLATED, -MAX_WBITS, MAX_MEM_LEVEL, Z_DEFAULT_STRATEGY); }
-int CDECL raw_deflate (z_stream *strm, int flush) { return deflate(strm, flush); } 
-int CDECL raw_deflate_end (z_stream *strm) { return deflateEnd(strm); } 
+int CDECL raw_deflate_init (z_stream *strm, int level)
+{
+  if (!strm) { return Z_STREAM_ERROR; }
+
+  strm->zalloc = my_alloc;
+  strm->zfree  = my_free;
+
+  return deflateInit2(strm, level, Z_DEFLATED, -MAX_WBITS, MAX_MEM_LEVEL, Z_DEFAULT_STRATEGY);
+}
+int CDECL raw_deflate (z_stream *strm, int flush)
+{
+  if (!strm) { return Z_STREAM_ERROR; }
+
+  return deflate(strm, flush);
+}
+int CDECL raw_deflate_end (z_stream *strm)
+{
+  if (!strm) { return Z_STREAM_ERROR; }
+
+  return deflateEnd(strm);
+}
 
 /* unzip */
 
-int CDECL raw_inflate_init (z_stream *strm) { return inflateInit2(strm, -MAX_WBITS); }
-int CDECL raw_inflate (z_stream *strm, int flush) { return inflate(strm, flush); }
-int CDECL raw_inflate_end (z_stream *strm) { return inflateEnd(strm); }
+int CDECL raw_inflate_init (z_stream *strm)
+{
+  if (!strm) { return Z_STREAM_ERROR; }
+
+  strm->zalloc = my_alloc;
+  strm->zfree  = my_free;
+
+  return inflateInit2(strm, -MAX_WBITS);
+}
+int CDECL raw_inflate (z_stream *strm, int flush)
+{
+  if (!strm) { return Z_STREAM_ERROR; }
+
+  return inflate(strm, flush);
+}
+int CDECL raw_inflate_end (z_stream *strm)
+{
+  if (!strm) { return Z_STREAM_ERROR; }
+
+  return inflateEnd(strm);
+}
 
 /* misc */
 
@@ -47,7 +96,7 @@ PROC LibFunc[] =
   {"update_crc32", "unsigned long update_crc32(unsigned long crc, char *src, unsigned int srclen);\n", update_crc32}
 };
 
-LDGLIB LibLdg[] = { { 0x0006,  12, LibFunc,  "zlib: deflate/inflate/crc32 basic routines.", 1} };
+LDGLIB LibLdg[] = { { 0x0007,  12, LibFunc,  "zlib: deflate/inflate/crc32 basic routines.", 1} };
 
 /*  */
 

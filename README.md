@@ -16,8 +16,8 @@ Other programs can use it, please read the how-to and functions calls in the st-
 - in an empty folder,  
    ```mkdir ./build/68000```  
    ```mkdir ./build/68020```  
-   ```mkdir ./build/ColfFire```  
+   ```mkdir ./build/ColdFire```  
 
-- get [deflate_r6_src.zip](https://ptonthat.fr/files/deflate/deflate_r6_src.zip) and unpack the contents to ./
+- get [deflate_r7_src.zip](https://ptonthat.fr/files/deflate/deflate_r7_src.zip) and unpack the contents to ./
 
 - deflate.ldg.xcodeproj is for Xcode 16.0, you may not need it if you use something else.
